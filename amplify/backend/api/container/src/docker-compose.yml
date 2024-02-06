@@ -1,32 +1,27 @@
-version: '3.1'
-
+version: "3.8"
 services:
-  redmine:
-    image: redmine
-    container_name: redmine
-    depends_on:
-        - db
-    restart: always
-    ports:
-        - 8080:3000
-    environment:
-        REDMINE_DB_MYSQL: db
-        REDMINE_DB_PASSWORD: example
-        REDMINE_SECRET_KEY_BASE: supersecretkey
-    volumes:
-      - vol_redmine:/usr/src/redmine/files
 
-  db:
-    image: mysql
-    container_name: redmine_db
-    restart: always
+  # MySQL コンテナ
+  mysql:
+    image: mysql:latest
+    volumes:
+      - ./mysql-data:/var/lib/mysql
     environment:
-        MYSQL_ROOT_PASSWORD: example
-        MYSQL_DATABASE: redmine
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: redmine
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
-    volumes:
-        - vol_redmine_db:/var/lib/mysql
 
-volumes:
-  vol_redmine:
-  vol_redmine_db:
+  # Redmine コンテナ
+  redmine:
+    image: redmine:latest
+    ports:
+      - 33000:3000
+    depends_on:
+      - mysql
+    volumes:
+      - ./redmine-files:/usr/src/redmine/files
+    environment:
+      REDMINE_DB_MYSQL: mysql
+      REDMINE_DB_USERNAME: root
+      REDMINE_DB_PASSWORD: password
+      REDMINE_DB_DATABASE: redmine
