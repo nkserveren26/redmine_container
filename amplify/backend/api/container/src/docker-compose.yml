@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+  redmine:
+    image: redmine
+    container_name: redmine
+    depends_on:
+        - db
+    restart: always
+    ports:
+        - 8080:3000
+    environment:
+        REDMINE_DB_MYSQL: db
+        REDMINE_DB_PASSWORD: example
+        REDMINE_SECRET_KEY_BASE: supersecretkey
+    volumes:
+      - vol_redmine:/usr/src/redmine/files
+
+  db:
+    image: mysql
+    container_name: redmine_db
+    restart: always
+    environment:
+        MYSQL_ROOT_PASSWORD: example
+        MYSQL_DATABASE: redmine
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    volumes:
+        - vol_redmine_db:/var/lib/mysql
+
+volumes:
+  vol_redmine:
+  vol_redmine_db:

@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-redmine-dev-225503-authRole",
+      "UnauthRoleArn": "arn:aws:iam::819628840011:role/amplify-redmine-dev-225503-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::819628840011:role/amplify-redmine-dev-225503-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-redmine-dev-225503-deployment",
+      "UnauthRoleName": "amplify-redmine-dev-225503-unauthRole",
+      "StackName": "amplify-redmine-dev-225503",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:819628840011:stack/amplify-redmine-dev-225503/26a82ec0-c42e-11ee-bae5-0a6912ea5177",
+      "AmplifyAppId": "d326c3jx9gowgl"
+    }
+  }
+}
